@@ -34,7 +34,7 @@ const DesignConfigurator = ({ configId, imageUrl, imageDimensions }: DesignConfi
 
     const router = useRouter();
 
-    const { mutate: saveConfig } = useMutation({
+    const { mutate: saveConfig, isPending } = useMutation({
         mutationKey: ["save-config"],
         mutationFn: async (args: SaveConfigArgs) => {
             await Promise.all([saveConfiguration(), _saveConfig(args)]);
@@ -328,7 +328,11 @@ const DesignConfigurator = ({ configId, imageUrl, imageDimensions }: DesignConfi
                                     model: options.model.value,
                                     configId
                                 })
-                            }}>
+                            }}
+                            isLoading={isPending}
+                            disabled={isPending}
+                            loadingText="Saving..."
+                            >
                                 Continue
                                 <ArrowRightIcon className="h-4 w-4 ml-1.5 inline" />
                             </Button>

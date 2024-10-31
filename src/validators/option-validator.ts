@@ -11,7 +11,7 @@ export const COLORS = [
     {
         label: "Black",
         value: "black",
-        tw: "zinc-900"
+        tw: "zinc-950"
     },
     {
         label: "Blue",
