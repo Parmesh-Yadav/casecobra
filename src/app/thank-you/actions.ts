@@ -7,14 +7,14 @@ export const getPaymentStatus = async ({ orderId }: { orderId: string }) => {
     //check for current user
     const { getUser } = getKindeServerSession();
     const user = await getUser();
-    if (!user.id || !user.email) {
+    if (!user?.id || !user?.email) {
         throw new Error("You need to be logged in to view this page");
     }
     //get order
     const order = await db.order.findFirst({
         where: {
             id: orderId,
-            userId: user.id,
+            userId: user?.id,
         },
         include: {
             billingAddress: true,
