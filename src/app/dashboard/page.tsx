@@ -6,13 +6,15 @@ import { formatPrice } from '@/lib/utils';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { notFound } from 'next/navigation';
 import StatusDropdown from './StatusDropdown';
+import { currentUser } from '@clerk/nextjs/server';
 
 const Page = async () => {
 
-    const { getUser } = getKindeServerSession();
-    const user = await getUser();
+    // const { getUser } = getKindeServerSession();
+    // const user = await getUser();
+    const user = await currentUser();
     const adminEmail = process.env.ADMIN_EMAIL;
-    if (!user || user.email !== adminEmail) {
+    if (!user || user.emailAddresses[0].emailAddress !== adminEmail) {
         return notFound();
     }
 
