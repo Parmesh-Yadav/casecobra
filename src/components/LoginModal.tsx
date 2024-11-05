@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import Image from 'next/image'
 import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs'
 import { buttonVariants } from './ui/button'
+import { SignInButton, SignUpButton } from "@clerk/nextjs"
 
 const LoginModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }) => {
     return (
@@ -11,10 +12,10 @@ const LoginModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatc
                 <DialogHeader>
                     <div className='relative mx-auto w-24  h-24 mb-2'>
                         <Image
-                        src='/snake-1.png'
-                        alt='Logo'
-                        className='object-contain'
-                        fill
+                            src='/snake-1.png'
+                            alt='Logo'
+                            className='object-contain'
+                            fill
                         />
                     </div>
                     <DialogTitle className='text-3xl  text-center font-bold tracking-tight text-gray-900'>
@@ -28,12 +29,16 @@ const LoginModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatc
                     </DialogDescription>
                 </DialogHeader>
                 <div className='grid grid-cols-2 gap-6 divide-x divide-gray-200'>
-                    <LoginLink className={buttonVariants({variant:'outline'})}>
-                        Login
-                    </LoginLink>
-                    <RegisterLink className={buttonVariants({variant:'default'})}>
-                        Sign Up
-                    </RegisterLink>
+                    <SignInButton mode="modal">
+                        <button className={buttonVariants({ variant: 'outline' })}>
+                            Login
+                        </button>
+                    </SignInButton>
+                    <SignUpButton mode="modal">
+                        <button className={buttonVariants({ variant: 'default' })}>
+                            Sign Up
+                        </button>
+                    </SignUpButton>
                 </div>
             </DialogContent>
         </Dialog>

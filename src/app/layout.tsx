@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Recursive } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
@@ -6,19 +5,15 @@ import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import Providers from "@/components/Providers";
 import { constructMetadata } from "@/lib/utils";
-import { AuthProvider } from "./AuthProvider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const recursive = Recursive({ subsets: ['latin'] })
 
 export const metadata = constructMetadata();
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <AuthProvider>
+    <ClerkProvider>
       <html lang="en">
         <body
           className={recursive.className}
@@ -35,6 +30,6 @@ export default function RootLayout({
           <Toaster />
         </body>
       </html>
-    </AuthProvider>
+    </ClerkProvider>
   );
 }

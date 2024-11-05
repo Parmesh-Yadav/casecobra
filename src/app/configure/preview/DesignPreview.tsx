@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 import LoginModal from '@/components/LoginModal';
+import { useUser } from '@clerk/nextjs';
 
 const DesignPreview = ({ configuration }: { configuration: configuration }) => {
 
@@ -22,7 +23,8 @@ const DesignPreview = ({ configuration }: { configuration: configuration }) => {
     const router = useRouter();
     const { toast } = useToast();
     const { id } = configuration;
-    const { user } = useKindeBrowserClient();
+    // const { user } = useKindeBrowserClient();
+    const { isSignedIn, user } = useUser()
     const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
 
     const confettiConfig = {
@@ -73,7 +75,7 @@ const DesignPreview = ({ configuration }: { configuration: configuration }) => {
     });
 
     const handleCheckout = () => {
-        if (user) {
+        if (isSignedIn) {
             //create payment session
             createPaymentSession({ configId: id })
         }
