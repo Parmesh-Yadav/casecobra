@@ -77,11 +77,11 @@ export async function POST(req: Request) {
                     }
                 })
             });
-            return NextResponse.json({
-                result: event,
-                ok: true
-            });
         }
+        return NextResponse.json({
+            result: event,
+            ok: true
+        });
     } catch (e) {
         console.log(e);
         return NextResponse.json(
